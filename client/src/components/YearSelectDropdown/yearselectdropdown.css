@@ -1,0 +1,21 @@
+.year-select {
+    appearance: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 8px 12px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.year-select:hover {
+    border-color: #999;
+}
+
+.year-select:focus {
+    border-color: #00a1e1;
+    box-shadow: 0 2px 4px rgba(0, 161, 225, 0.2);
+}
