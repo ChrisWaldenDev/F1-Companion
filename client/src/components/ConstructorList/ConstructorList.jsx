@@ -55,7 +55,6 @@ function ConstructorList() {
                 </div>
             ) : (
                 <>
-                    <Header/>
                     <h2>List of Constructors</h2>
                     <YearSelectDropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
                     <div>
