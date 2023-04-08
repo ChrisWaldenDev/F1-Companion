@@ -58,7 +58,6 @@ function DriverList() {
 
     return (
         <>
-            <Header/>
             {isLoading ? (
                 <div style={{
                     display: 'flex',

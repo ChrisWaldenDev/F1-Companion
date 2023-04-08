@@ -73,7 +73,6 @@ function RaceList() {
 
     return (
         <>
-            <Header/>
             {isLoading ? (
                 <div style={{
                     display: 'flex',
@@ -85,6 +84,7 @@ function RaceList() {
                 </div>
             ) : (
                 <>
+                    <h2>List of Races</h2>
                     <YearSelectDropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
                     {[...racesMap.values()].map(race => (
                         <div key={race.circuitId}>

@@ -43,7 +43,6 @@ function ConstructorList() {
 
     return (
         <>
-            <Header/>
             {isLoading ? (
                 <div style={{
                     display: 'flex',
