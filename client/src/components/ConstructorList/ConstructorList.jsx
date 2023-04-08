@@ -9,7 +9,7 @@ function ConstructorList() {
 
 
     useEffect(() => {
-        fetch(`http://ergast.com/api/f1/${selectedYear}/constructorStandings.json`)
+        fetch(`https://ergast.com/api/f1/${selectedYear}/constructorStandings.json`)
             .then(response => response.json())
             .then(data => {
                 const constructors = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;

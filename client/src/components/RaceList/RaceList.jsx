@@ -13,7 +13,7 @@ function RaceList() {
 
     //Tracks the most recent round of races
     useEffect(() => {
-        fetch(`http://ergast.com/api/f1/current/last/results.json`)
+        fetch(`https://ergast.com/api/f1/current/last/results.json`)
             .then(response => response.json())
             .then(data => {
                 setRound(data.MRData.RaceTable.round);
@@ -23,7 +23,7 @@ function RaceList() {
     //Updates state of circuits in order
     useEffect(() => {
         setIsLoading(true);
-        fetch(`http://ergast.com/api/f1/${selectedYear}.json`)
+        fetch(`https://ergast.com/api/f1/${selectedYear}.json`)
             .then(response => response.json())
             .then(data => {
                 const races = data.MRData.RaceTable.Races;

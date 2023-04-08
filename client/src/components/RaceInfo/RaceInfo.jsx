@@ -17,7 +17,7 @@ function RaceInfo() {
     });
 
     useEffect(() => {
-        fetch(`http://ergast.com/api/f1/2023/2/results.json`)
+        fetch(`https://ergast.com/api/f1/2023/2/results.json`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);

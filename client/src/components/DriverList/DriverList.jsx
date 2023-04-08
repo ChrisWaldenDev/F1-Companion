@@ -11,7 +11,7 @@ function DriverList() {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch(`http://ergast.com/api/f1/${selectedYear}/driverStandings.json`)
+        fetch(`https://ergast.com/api/f1/${selectedYear}/driverStandings.json`)
             .then(response => response.json())
             .then(data => {
                 const drivers = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
