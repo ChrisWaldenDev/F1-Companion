@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import './yearselectdropdown.css';
-import {Box, FormControl, InputLabel, MenuItem, Select, Typography} from "@mui/material";
+import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
 function YearSelectDropdown({options, onSelect, selectedValue}) {
     const [selectedYear, setSelectedYear] = useState(options[0]);
