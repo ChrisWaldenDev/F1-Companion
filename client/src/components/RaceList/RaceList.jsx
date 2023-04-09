@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import YearSelectDropdown from "../YearSelectDropdown/YearSelectDropdown.jsx";
-import Header from "../Header/Header.jsx";
-import {CircularProgress} from "@mui/material";
+import {Box, CircularProgress} from "@mui/material";
 
 function RaceList() {
     const [racesMap, setRacesMap] = useState(new Map());
@@ -77,13 +76,12 @@ function RaceList() {
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100vh'
+                    alignItems: 'flex-start'
                 }}>
                     <CircularProgress/>
                 </div>
             ) : (
-                <>
+                <Box sx={{color: 'white'}}>
                     <h2>List of Races</h2>
                     <YearSelectDropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
                     {[...racesMap.values()].map(race => (
@@ -92,7 +90,7 @@ function RaceList() {
                             {handleDateFormat(race)}
                         </div>
                     ))}
-                </>
+                </Box>
             )}
         </>);
 }
