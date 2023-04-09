@@ -1,14 +1,24 @@
 import {useEffect, useState} from 'react';
 import YearSelectDropdown from "../YearSelectDropdown/YearSelectDropdown.jsx";
-import Header from "../Header/Header.jsx";
-import {CircularProgress} from "@mui/material";
+import {
+    Box,
+    CircularProgress,
+    Divider,
+    Paper,
+    Table, TableBody, TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography
+} from "@mui/material";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 
 function ConstructorList() {
     const [constructorsMap, setConstructorsMap] = useState(new Map());
     const [selectedYear, setSelectedYear] = useState(2023);
     const [isLoading, setIsLoading] = useState(true);
-
+    const rows = [];
 
     useEffect(() => {
         setIsLoading(true);
@@ -28,7 +38,6 @@ function ConstructorList() {
             })
     }, [selectedYear])
 
-
     //Year select functionality
     let yearsList = [];
     const currentYear = new Date().getFullYear();
@@ -41,35 +50,103 @@ function ConstructorList() {
         setSelectedYear(value)
     }
 
+    function createData(name, position, points, wins, nationality) {
+        return {name, position, points, wins, nationality};
+    }
+
+    for (let team of constructorsMap.values()) {
+        const nationality = team.nationality;
+        const position = team.position;
+        const points = team.points;
+        const wins = team.wins;
+        const name = team.name;
+        const data = createData(name, position, points, wins, nationality);
+        rows.push(data);
+    }
+
+    function getPositionStyle(position) {
+        let backgroundColor = '#f3f3f3';
+        let fontWeight = "regular";
+        switch (position) {
+            case "1":
+                backgroundColor = '#C9B037';
+                fontWeight = "bold";
+                break;
+            case "2":
+                backgroundColor = '#D7D7D7';
+                fontWeight = "bold";
+                break;
+            case "3":
+                backgroundColor = '#AD8A56';
+                fontWeight = "bold";
+                break;
+            default:
+                break;
+        }
+        return {
+            backgroundColor,
+            fontWeight
+        }
+    }
+
     return (
-        <>
+        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             {isLoading ? (
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '100vh'
+                    alignItems: 'flex-start'
                 }}>
                     <CircularProgress/>
                 </div>
             ) : (
-                <>
-                    <h2>List of Constructors</h2>
-                    <YearSelectDropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
-                    <div>
-                        <ul>
-                            {[...constructorsMap.values()].map((constructor) => (
-                                <div key={constructor.constructorId}>
-                                    <a href={constructor.url}>{constructor.name}</a>
-                                    <br/> Position: {constructor.position}
-                                    <br/> Points: {constructor.points}
-                                    <br/> Wins: {constructor.wins}
-                                </div>
+
+                <TableContainer component={Paper}
+                                sx={{maxWidth: '1000px', mt: '16px', backgroundColor: '#f3f3f3', my: '16px'}}>
+                    <Box sx={{
+                        mt: '16px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                        <Typography variant="h4" sx={{
+                            ml: '145px',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            flexGrow: 1,
+                            display: 'flex',
+                            fontWeight: 'bold'
+                        }}>{selectedYear} Constructor Standings</Typography>
+                        <YearSelectDropdown options={yearsList} onSelect={handleYearSelect}
+                                            selectedValue={selectedYear}/>
+                    </Box>
+                    <Divider/>
+                    <Table sx={{minWidth: 650}} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell><EmojiEventsIcon/></TableCell>
+                                <TableCell>Constructor Name</TableCell>
+                                <TableCell align="left">Points</TableCell>
+                                <TableCell align="left">Wins</TableCell>
+                                <TableCell align="left">Nationality</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow key={row.position}>
+                                    <TableCell align="center" scope="row"
+                                               sx={{width: '10px', ...getPositionStyle(row.position)}}>{row.position}</TableCell>
+                                    <TableCell align="left">{row.name}</TableCell>
+                                    <TableCell align="left">{row.points}</TableCell>
+                                    <TableCell align="left">{row.wins}</TableCell>
+                                    <TableCell align="left">{row.nationality}</TableCell>
+                                </TableRow>
                             ))}
-                        </ul>
-                    </div>
-                </>)}
-        </>);
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
+        </Box>);
 }
 
 export default ConstructorList;

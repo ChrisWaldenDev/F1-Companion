@@ -1,10 +1,11 @@
 import {useState, useEffect} from "react";
 import {Box} from "@mui/material";
+import './infobar.css';
 
 //Provides Date/Time
 const Infobar = () => {
     return (
-        <Box sx={{flexGrow: 1,
+        <Box className="infobar" sx={{flexGrow: 1,
         backgroundColor: 'primary.dark',
         color: '#f3f3f3',
         display: 'flex',

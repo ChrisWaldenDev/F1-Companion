@@ -1,4 +1,4 @@
-import {AppBar, Box, Button, Divider, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Divider, Stack, Toolbar, Typography} from "@mui/material";
 import {useNavigate} from 'react-router-dom';
 
 //Defines the Navbar
@@ -21,21 +21,23 @@ const Navbar = () => {
                             F1 Companion
                         </Typography>
                     </Button>
-                    <Divider orientation="vertical" variant="middle" flexItem sx={{p: 1, mr: 165}}/>
-                    <Button variant="text" disableRipple onClick={() => handleClick('/drivers')}
-                            sx={{m: 1, color: "#f3f3f3"}}>
-                        Drivers
-                    </Button>
-                    <Divider orientation="vertical" variant="middle" flexItem/>
-                    <Button variant="text" disableRipple onClick={() => handleClick('/constructors')}
-                            sx={{m: 1, color: "#f3f3f3"}}>
-                        Constructors
-                    </Button>
-                    <Divider orientation="vertical" variant="middle" flexItem/>
-                    <Button variant="text" disableRipple onClick={() => handleClick('/schedule')}
-                            sx={{m: 1, color: "#f3f3f3"}}>
-                        Schedule
-                    </Button>
+                    <Divider orientation="vertical" flexItem sx={{p:'5px'}}/>
+                    <Stack direction="row" spacing={2}
+                           divider={<Divider orientation="vertical" variant="middle" flexItem/>}
+                           sx={{display: 'flex', flexGrow: 1, justifyContent: 'flex-end', pr: '10px'}}>
+                        <Button variant="text" disableRipple onClick={() => handleClick('/drivers')}
+                                sx={{m: 1, color: "#f3f3f3"}}>
+                            Drivers
+                        </Button>
+                        <Button variant="text" disableRipple onClick={() => handleClick('/constructors')}
+                                sx={{m: 1, color: "#f3f3f3"}}>
+                            Constructors
+                        </Button>
+                        <Button variant="text" disableRipple onClick={() => handleClick('/schedule')}
+                                sx={{m: 1, color: "#f3f3f3"}}>
+                            Schedule
+                        </Button>
+                    </Stack>
                 </Toolbar>
             </AppBar>
         </Box>
