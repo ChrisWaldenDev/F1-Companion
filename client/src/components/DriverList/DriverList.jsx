@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import YearSelectDropdown from "../YearSelectDropdown/YearSelectDropdown.jsx";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import './driverlist.css';
 import {
     Box,
     CircularProgress, Divider,
@@ -100,6 +101,16 @@ function DriverList() {
             default:
                 break;
         }
+
+        switch (backgroundColor) {
+            case '#f3f3f3':
+                if (position > 3) {
+                    backgroundColor = position % 2 === 0 ? '#f9f9f9' : '#ffffff';
+                }
+                break;
+            default:
+                break;
+        }
         return {
             backgroundColor,
             fontWeight
@@ -118,8 +129,9 @@ function DriverList() {
                 </div>
             ) : (
 
-                <TableContainer component={Paper}
-                                sx={{maxWidth: '1000px', mt: '16px', backgroundColor: '#f3f3f3', my: '16px'}}>
+                <TableContainer component={Paper} className="table-container"
+                                sx={{maxWidth: '1000px', mt: '16px', backgroundColor: '#f9f9f9',
+                                    my: '16px', overflowY: 'scroll', height:'690px'}}>
                     <Box sx={{
                         mt: '16px',
                         display: 'flex',
@@ -139,7 +151,7 @@ function DriverList() {
                     </Box>
                     <Divider/>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
-                        <TableHead>
+                        <TableHead sx={{backgroundColor: '#f1f1f1'}}>
                             <TableRow>
                                 <TableCell><EmojiEventsIcon/></TableCell>
                                 <TableCell>Driver Name</TableCell>
@@ -149,8 +161,9 @@ function DriverList() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
-                                <TableRow key={row.position}>
+                            {rows.map((row, index) => (
+                                <TableRow key={row.position}
+                                          sx={{backgroundColor: index % 2 !== 0 ? '#f9f9f9' : '#ffffff'}}>
                                     <TableCell align="center" scope="row"
                                                sx={{width: '10px', ...getPositionStyle(row.position)}}>{row.position}</TableCell>
                                     <TableCell align="left">{row.name}</TableCell>
