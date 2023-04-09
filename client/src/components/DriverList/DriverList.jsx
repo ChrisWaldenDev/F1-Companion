@@ -118,7 +118,7 @@ function DriverList() {
     }
 
     return (
-        <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Box sx={{display: 'flex', mt: '16px', flexDirection: 'column', alignItems: 'center'}}>
             {isLoading ? (
                 <div style={{
                     display: 'flex',
@@ -130,10 +130,12 @@ function DriverList() {
             ) : (
 
                 <TableContainer component={Paper} className="table-container"
-                                sx={{maxWidth: '1000px', mt: '16px', backgroundColor: '#f9f9f9',
-                                    my: '16px', overflowY: 'scroll', height:'690px'}}>
+                                sx={{
+                                    maxWidth: '1000px', backgroundColor: '#f9f9f9',
+                                    overflowY: 'scroll', height: '675px', position: 'relative'
+                                }}>
                     <Box sx={{
-                        mt: '16px',
+                        my: '16px',
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center'
@@ -151,13 +153,13 @@ function DriverList() {
                     </Box>
                     <Divider/>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
-                        <TableHead sx={{backgroundColor: '#f1f1f1'}}>
+                        <TableHead sx={{backgroundColor: '#f1f1f1', position: 'sticky', top: 0}}>
                             <TableRow>
-                                <TableCell><EmojiEventsIcon/></TableCell>
-                                <TableCell>Driver Name</TableCell>
-                                <TableCell align="left">Points</TableCell>
-                                <TableCell align="left">Wins</TableCell>
-                                <TableCell align="left">Team</TableCell>
+                                <TableCell sx={{display: 'flex'}}><EmojiEventsIcon/></TableCell>
+                                <TableCell align="left" sx={{fontSize: 'large'}}>Driver Name</TableCell>
+                                <TableCell align="left" sx={{fontSize: 'large'}}>Points</TableCell>
+                                <TableCell align="left" sx={{fontSize: 'large'}}>Wins</TableCell>
+                                <TableCell align="left" sx={{fontSize: 'large'}}>Team</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

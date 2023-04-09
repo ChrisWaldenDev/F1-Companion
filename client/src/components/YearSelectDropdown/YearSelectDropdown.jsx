@@ -15,7 +15,7 @@ function YearSelectDropdown({options, onSelect, selectedValue}) {
     }
 
     return (
-        <Box sx={{minWidth: 120, m: '10px'}}>
+        <Box sx={{minWidth: 120}}>
             <FormControl variant="filled">
                 <InputLabel id="year-select-label" sx={{mt: '-6px'}}>Year</InputLabel>
                 <Select
@@ -27,7 +27,21 @@ function YearSelectDropdown({options, onSelect, selectedValue}) {
                     classes={{select: 'selected'}}
                     sx={{
                         backgroundColor: '#f9f9f9',
-
+                    }}
+                    MenuProps={{
+                        anchorOrigin: {
+                            vertical: "bottom",
+                            horizontal: "right"
+                    },
+                        transformOrigin: {
+                            vertical: "top",
+                            horizontal: "right"
+                        },
+                        PaperProps: {
+                            style: {
+                                maxHeight: '200px',
+                            },
+                        },
                     }}
                 >{options.map((option) => (
                     <MenuItem key={option} value={option}>{option}</MenuItem>
