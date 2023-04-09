@@ -16,7 +16,7 @@ const Navbar = () => {
                 justifyContent: 'center'
             }}>
                 <Toolbar>
-                    <Button disableRipple onClick={() => handleClick('/')}>
+                    <Button disableRipple onClick={() => handleClick('/')} sx={{textTransform:'none', ml: '-10px'}}>
                         <Typography fontSize="x-large" fontWeight="bold" color="#f3f3f3">
                             F1 Companion
                         </Typography>
@@ -24,17 +24,17 @@ const Navbar = () => {
                     <Divider orientation="vertical" flexItem sx={{p:'5px'}}/>
                     <Stack direction="row" spacing={2}
                            divider={<Divider orientation="vertical" variant="middle" flexItem/>}
-                           sx={{display: 'flex', flexGrow: 1, justifyContent: 'flex-end', pr: '10px'}}>
+                           sx={{display: 'flex', flexGrow: 1, justifyContent: 'flex-end'}}>
                         <Button variant="text" disableRipple onClick={() => handleClick('/drivers')}
-                                sx={{m: 1, color: "#f3f3f3"}}>
+                                sx={{m: 1, color: "#f3f3f3", textTransform: 'none', fontSize:"large"}}>
                             Drivers
                         </Button>
                         <Button variant="text" disableRipple onClick={() => handleClick('/constructors')}
-                                sx={{m: 1, color: "#f3f3f3"}}>
+                                sx={{m: 1, color: "#f3f3f3", textTransform: 'none', fontSize:"large"}}>
                             Constructors
                         </Button>
                         <Button variant="text" disableRipple onClick={() => handleClick('/schedule')}
-                                sx={{m: 1, color: "#f3f3f3"}}>
+                                sx={{m: 1, color: "#f3f3f3", textTransform: 'none', fontSize:"large"}}>
                             Schedule
                         </Button>
                     </Stack>
@@ -43,14 +43,5 @@ const Navbar = () => {
         </Box>
     )
 }
-/*<nav className="navbar">
-            <div className="logo">
-                <a href="#">F1 Companion</a>
-            </div>
-            <ul>
-                <li><a href="#">Drivers</a></li>
-                <li><a href="#">Constructors</a></li>
-                <li><a href="#">Races</a></li>
-            </ul>
-        </nav>*/
+
 export default Navbar;
