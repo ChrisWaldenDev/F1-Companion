@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import YearSelectDropdown from "../YearSelectDropdown/YearSelectDropdown.jsx";
+import Dropdown from "../Dropdown/Dropdown.jsx";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import './driverlist.css';
 import {
@@ -148,8 +148,8 @@ function DriverList() {
                             display: 'flex',
                             fontWeight: 'bold'
                         }}>{selectedYear} Driver Standings</Typography>
-                        <YearSelectDropdown options={yearsList} onSelect={handleYearSelect}
-                                            selectedValue={selectedYear}/>
+                        <Dropdown options={yearsList} onSelect={handleYearSelect}
+                                  selectedValue={selectedYear} label="Year"/>
                     </Box>
                     <Divider/>
                     <Table sx={{minWidth: 650}} aria-label="simple table">
@@ -185,7 +185,7 @@ function DriverList() {
 /*
 <>
                     <h2>List of Drivers</h2>
-                    <YearSelectDropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
+                    <Dropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
                     <div>
                         <ul>
                             {[...driversMap.values()].map((driver) => (

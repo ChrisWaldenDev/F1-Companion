@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import YearSelectDropdown from "../YearSelectDropdown/YearSelectDropdown.jsx";
+import Dropdown from "../Dropdown/Dropdown.jsx";
 import {
     Box,
     CircularProgress,
@@ -135,8 +135,8 @@ function ConstructorList() {
                             display: 'flex',
                             fontWeight: 'bold'
                         }}>{selectedYear} Constructor Standings</Typography>
-                        <YearSelectDropdown options={yearsList} onSelect={handleYearSelect}
-                                            selectedValue={selectedYear}/>
+                        <Dropdown options={yearsList} onSelect={handleYearSelect}
+                                  selectedValue={selectedYear} label="Year"/>
                     </Box>
                     <Divider/>
                     <Table sx={{minWidth: 650}} aria-label="simple table">

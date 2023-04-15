@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import YearSelectDropdown from "../YearSelectDropdown/YearSelectDropdown.jsx";
+import Dropdown from "../Dropdown/Dropdown.jsx";
 import {Box, CircularProgress} from "@mui/material";
 
 function RaceList() {
@@ -83,7 +83,7 @@ function RaceList() {
             ) : (
                 <Box sx={{color: 'white'}}>
                     <h2>List of Races</h2>
-                    <YearSelectDropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
+                    <Dropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear} label="Year"/>
                     {[...racesMap.values()].map(race => (
                         <div key={race.circuitId}>
                             <br/><a href={race.url}><h4>{race.raceName} ({race.country})</h4></a>

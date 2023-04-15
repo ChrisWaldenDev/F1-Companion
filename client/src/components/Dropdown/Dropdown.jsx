@@ -1,28 +1,28 @@
 import {useEffect, useState} from 'react';
-import './yearselectdropdown.css';
+import './dropdown.css';
 import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
-function YearSelectDropdown({options, onSelect, selectedValue}) {
-    const [selectedYear, setSelectedYear] = useState(options[0]);
+function Dropdown({options, onSelect, selectedValue, label}) {
+    const [selectedOption, setSelectedOption] = useState(options[0]);
 
     useEffect(() => {
-        setSelectedYear(selectedValue);
+        setSelectedOption(selectedValue);
     }, [selectedValue])
 
     function handleChange(event) {
-        setSelectedYear(event.target.value);
+        setSelectedOption(event.target.value);
         onSelect(event.target.value);
     }
 
     return (
         <Box sx={{minWidth: 120}}>
             <FormControl variant="filled">
-                <InputLabel id="year-select-label" sx={{mt: '-6px'}}>Year</InputLabel>
+                <InputLabel id="option-select-label" sx={{mt: '-6px'}}>Year</InputLabel>
                 <Select
-                    labelId="year-select-label"
-                    id="year-select"
-                    value={selectedYear}
-                    label="Year"
+                    labelId="option-select-label"
+                    id="option-select"
+                    value={selectedOption}
+                    label={label}
                     onChange={handleChange}
                     classes={{select: 'selected'}}
                     sx={{
@@ -51,4 +51,4 @@ function YearSelectDropdown({options, onSelect, selectedValue}) {
     );
 }
 
-export default YearSelectDropdown;
+export default Dropdown;
