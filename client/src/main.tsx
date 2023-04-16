@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App'
 import {
     BrowserRouter, Route,
     Routes
@@ -11,14 +11,14 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import {ThemeProvider} from "@mui/material";
-import theme from './assets/theme.jsx';
-import DriverList from "./components/DriverList/DriverList.jsx";
-import ConstructorList from "./components/ConstructorList/ConstructorList.jsx";
-import RaceList from "./components/RaceList/RaceList.jsx";
-import Header from "./components/Header/Header.jsx";
+import theme from './assets/theme';
+import DriverList from "./components/DriverList/DriverList";
+import ConstructorList from "./components/ConstructorList/ConstructorList";
+import RaceList from "./components/RaceList/RaceList";
+import Header from "./components/Header/Header";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
             <BrowserRouter>
@@ -28,8 +28,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path="drivers" element={<DriverList/>}/>
                     <Route path="constructors" element={<ConstructorList/>}/>
                     <Route path="schedule" element={<RaceList/>}/>
+                    <Route path="*" element={<PageNotFound/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
-    </React.StrictMode>
+    </React.StrictMode>,
+    document.getElementById('root')
 )

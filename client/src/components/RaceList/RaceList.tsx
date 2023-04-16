@@ -1,14 +1,13 @@
 import {useState, useEffect} from "react";
-import YearSelectDropdown from "../YearSelectDropdown/YearSelectDropdown.jsx";
+import Dropdown from "../Dropdown/Dropdown";
 import {Box, CircularProgress} from "@mui/material";
+import React from "react";
 
 function RaceList() {
     const [racesMap, setRacesMap] = useState(new Map());
     const [round, setRound] = useState(1);
     const [selectedYear, setSelectedYear] = useState(2023);
     const [isLoading, setIsLoading] = useState(true);
-
-
 
     //Tracks the most recent round of races
     useEffect(() => {
@@ -26,7 +25,7 @@ function RaceList() {
             .then(response => response.json())
             .then(data => {
                 const races = data.MRData.RaceTable.Races;
-                const racesObj = races.reduce((acc, race) => {
+                const racesObj = races.reduce((acc: any, race: any) => {
                     const {circuitId} = race.Circuit;
                     const {country} = race.Circuit.Location;
                     const {date, time, round, url, raceName} = race;
@@ -43,7 +42,7 @@ function RaceList() {
     }, [selectedYear])
 
     //Formats date/time to local timezone
-    function handleDateFormat(race) {
+    function handleDateFormat(race: any){
         const utcTimeString = race.time;
         const currentDate = new Date();
         const year = currentDate.getFullYear();
@@ -55,7 +54,7 @@ function RaceList() {
         if (Date.parse(race.date) - Date.parse(new Date().toString()) > 0) {
             return localDate;
         } else {
-            return (<strike>{localDate}</strike>);
+            return (<s>{localDate}</s>);
         }
     }
 
@@ -66,7 +65,7 @@ function RaceList() {
         yearsList.push(year);
     }
 
-    function handleYearSelect(value) {
+    function handleYearSelect(value: number) {
         setSelectedYear(value)
     }
 
@@ -83,7 +82,7 @@ function RaceList() {
             ) : (
                 <Box sx={{color: 'white'}}>
                     <h2>List of Races</h2>
-                    <YearSelectDropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear}/>
+                    <Dropdown options={yearsList} onSelect={handleYearSelect} selectedValue={selectedYear} label="Year"/>
                     {[...racesMap.values()].map(race => (
                         <div key={race.circuitId}>
                             <br/><a href={race.url}><h4>{race.raceName} ({race.country})</h4></a>

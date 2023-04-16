@@ -1,5 +1,6 @@
-import Navbar from "./Navbar.jsx";
-import Infobar from "./Infobar.jsx";
+import Navbar from "./Navbar.js";
+import Infobar from "./Infobar.js";
+import React from "react";
 
 //Default Header
 const Header = () => {
