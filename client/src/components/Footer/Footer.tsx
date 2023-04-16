@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-const Footer = () => {
-    return (
-        <div className="footer">
-            <p>Website under development by Waldxn</p>
-        </div>
-    )
+function Footer (): JSX.Element {
+  return (
+    <div className="footer">
+      <p>Website under development by Waldxn</p>
+    </div>
+  )
 }
 
-export default Footer;
+export default Footer

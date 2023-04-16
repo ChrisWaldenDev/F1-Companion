@@ -1,15 +1,15 @@
-import Navbar from "./Navbar.tsx";
-import Infobar from "./Infobar.tsx";
-import React from "react";
+import Navbar from './Navbar.tsx'
+import Infobar from './Infobar.tsx'
+import React from 'react'
 
-//Default Header
-const Header = () => {
-    return (
-        <div>
-            <Navbar/>
-            <Infobar/>
-        </div>
-    );
+// Default Header
+function Header (): JSX.Element {
+  return (
+    <div>
+      <Navbar/>
+      <Infobar/>
+    </div>
+  )
 }
 
-export default Header;
+export default Header
