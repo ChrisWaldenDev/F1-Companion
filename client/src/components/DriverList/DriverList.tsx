@@ -61,8 +61,6 @@ function DriverList (): JSX.Element {
       .then(data => {
         const drivers = data.MRData.StandingsTable.StandingsLists[0].DriverStandings
         const driversObj = drivers.reduce((acc: DriverMap, driver: Driver) => {
-          console.log('acc type', typeof acc)
-          console.log('driver type', typeof driver)
           const { driverId, givenName, familyName, nationality, dateOfBirth, url } = driver.Driver
           const { constructorId, name } = driver.Constructors[0]
           const { position, points, wins } = driver
