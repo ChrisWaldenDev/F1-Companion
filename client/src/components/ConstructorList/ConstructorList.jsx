@@ -103,68 +103,62 @@ function ConstructorList() {
 
     return (
         <Box sx={{display: 'flex', mt: '16px', flexDirection: 'column', alignItems: 'center'}}>
-            {isLoading ? (
-                <div style={{
+            <TableContainer component={Paper} className="constructor-table-container"
+                            sx={{
+                                maxWidth: '1000px',
+                                backgroundColor: '#f9f9f9',
+                                overflowY: 'scroll',
+                                height: '675px',
+                                position: 'relative'
+                            }}>
+                {isLoading && (
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
+                        <CircularProgress/>
+                    </div>
+                )}
+                <Box sx={{
+                    my: '16px',
                     display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'flex-start'
+                    justifyContent: 'space-between',
+                    alignItems: 'center'
                 }}>
-                    <CircularProgress/>
-                </div>
-            ) : (
-
-                <TableContainer component={Paper} className="constructor-table-container"
-                                sx={{
-                                    maxWidth: '1000px',
-                                    backgroundColor: '#f9f9f9',
-                                    overflowY: 'scroll',
-                                    height: '675px',
-                                    position: 'relative'
-                                }}>
-                    <Box sx={{
-                        my: '16px',
+                    <Typography variant="h4" sx={{
+                        ml: '145px',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        flexGrow: 1,
                         display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
-                    }}>
-                        <Typography variant="h4" sx={{
-                            ml: '145px',
-                            justifyContent: 'center',
-                            textAlign: 'center',
-                            flexGrow: 1,
-                            display: 'flex',
-                            fontWeight: 'bold'
-                        }}>{selectedYear} Constructor Standings</Typography>
-                        <Dropdown options={yearsList} onSelect={handleYearSelect}
-                                  selectedValue={selectedYear} label="Year"/>
-                    </Box>
-                    <Divider/>
-                    <Table sx={{minWidth: 650}} aria-label="simple table">
-                        <TableHead sx={{backgroundColor: '#f1f1f1', position: 'sticky', top: 0}}>
-                            <TableRow>
-                                <TableCell sx={{display: 'flex'}}> <EmojiEventsIcon/></TableCell>
-                                <TableCell align="left" sx={{fontSize: 'large'}}>Constructor Name</TableCell>
-                                <TableCell align="left" sx={{fontSize: 'large'}}>Points</TableCell>
-                                <TableCell align="left" sx={{fontSize: 'large'}}>Wins</TableCell>
-                                <TableCell align="left" sx={{fontSize: 'large'}}>Nationality</TableCell>
+                        fontWeight: 'bold'
+                    }}>{selectedYear} Constructor Standings</Typography>
+                    <Dropdown options={yearsList} onSelect={handleYearSelect}
+                              selectedValue={selectedYear} label="Year"/>
+                </Box>
+                <Divider/>
+                <Table sx={{minWidth: 650}} aria-label="simple table">
+                    <TableHead sx={{backgroundColor: '#f1f1f1', position: 'sticky', top: 0}}>
+                        <TableRow>
+                            <TableCell sx={{display: 'flex'}}> <EmojiEventsIcon/></TableCell>
+                            <TableCell align="left" sx={{fontSize: 'large'}}>Constructor Name</TableCell>
+                            <TableCell align="left" sx={{fontSize: 'large'}}>Points</TableCell>
+                            <TableCell align="left" sx={{fontSize: 'large'}}>Wins</TableCell>
+                            <TableCell align="left" sx={{fontSize: 'large'}}>Nationality</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row, index) => (
+                            <TableRow key={row.position}
+                                      sx={{backgroundColor: index % 2 !== 0 ? '#f9f9f9' : '#ffffff'}}>
+                                <TableCell align="center" scope="row"
+                                           sx={{width: '10px', ...getPositionStyle(row.position)}}>{row.position}</TableCell>
+                                <TableCell align="left">{row.name}</TableCell>
+                                <TableCell align="left">{row.points}</TableCell>
+                                <TableCell align="left">{row.wins}</TableCell>
+                                <TableCell align="left">{row.nationality}</TableCell>
                             </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.map((row, index) => (
-                                <TableRow key={row.position}
-                                          sx={{backgroundColor: index % 2 !== 0 ? '#f9f9f9' : '#ffffff'}}>
-                                    <TableCell align="center" scope="row"
-                                               sx={{width: '10px', ...getPositionStyle(row.position)}}>{row.position}</TableCell>
-                                    <TableCell align="left">{row.name}</TableCell>
-                                    <TableCell align="left">{row.points}</TableCell>
-                                    <TableCell align="left">{row.wins}</TableCell>
-                                    <TableCell align="left">{row.nationality}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            )}
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Box>);
 }
 

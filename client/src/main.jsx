@@ -16,6 +16,7 @@ import DriverList from "./components/DriverList/DriverList.jsx";
 import ConstructorList from "./components/ConstructorList/ConstructorList.jsx";
 import RaceList from "./components/RaceList/RaceList.jsx";
 import Header from "./components/Header/Header.jsx";
+import PageNotFound from "./components/PageNotFound/PageNotFound.jsx";
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path="drivers" element={<DriverList/>}/>
                     <Route path="constructors" element={<ConstructorList/>}/>
                     <Route path="schedule" element={<RaceList/>}/>
+                    <Route path="*" element={<PageNotFound/>}/>
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
