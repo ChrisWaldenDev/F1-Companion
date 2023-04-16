@@ -1,3 +1,4 @@
+import React from 'react';
 import {AppBar, Box, Button, Divider, Stack, Toolbar, Typography} from "@mui/material";
 import {useNavigate} from 'react-router-dom';
 
@@ -5,7 +6,7 @@ import {useNavigate} from 'react-router-dom';
 const Navbar = () => {
     const navigate = useNavigate();
 
-    function handleClick(route) {
+    function handleClick(route: string) {
         navigate(route)
     }
 

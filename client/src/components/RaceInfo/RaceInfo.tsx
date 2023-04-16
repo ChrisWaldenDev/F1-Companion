@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import React from "react";
 
 function RaceInfo() {
     const [raceData, setRaceData] = useState({

@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import {Box} from "@mui/material";
 import './infobar.css';
+import React from "react";
 
 //Provides Date/Time
 const Infobar = () => {

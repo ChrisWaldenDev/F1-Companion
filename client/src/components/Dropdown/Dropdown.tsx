@@ -1,15 +1,23 @@
+import React from "react";
 import {useEffect, useState} from 'react';
 import './dropdown.css';
 import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
-function Dropdown({options, onSelect, selectedValue, label}) {
+type DrowdownProps = {
+    options: any[];
+    onSelect: (value: any) => void;
+    selectedValue: any;
+    label: string;
+}
+
+function Dropdown({options, onSelect, selectedValue, label}: DrowdownProps) {
     const [selectedOption, setSelectedOption] = useState(options[0]);
 
     useEffect(() => {
         setSelectedOption(selectedValue);
     }, [selectedValue])
 
-    function handleChange(event) {
+    function handleChange(event: any) {
         setSelectedOption(event.target.value);
         onSelect(event.target.value);
     }

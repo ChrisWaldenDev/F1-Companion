@@ -1,72 +1,89 @@
-import {useEffect, useState} from 'react';
-import Dropdown from "../Dropdown/Dropdown.jsx";
+import React from "react";
+import {useState, useEffect} from "react";
+import Dropdown from "../Dropdown/Dropdown.js";
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import './driverlist.css';
 import {
     Box,
-    CircularProgress,
-    Divider,
+    CircularProgress, Divider,
     Paper,
-    Table, TableBody, TableCell,
+    Table,
+    TableBody,
+    TableCell,
     TableContainer,
     TableHead,
     TableRow,
     Typography
 } from "@mui/material";
-import '@fontsource/roboto';
-import './constructorlist.css';
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
-
-function ConstructorList() {
-    const [constructorsMap, setConstructorsMap] = useState(new Map());
+function DriverList() {
+    const [driversMap, setDriversMap] = useState(new Map());
     const [selectedYear, setSelectedYear] = useState(2023);
     const [isLoading, setIsLoading] = useState(true);
     const rows = [];
 
     useEffect(() => {
         setIsLoading(true);
-        fetch(`https://ergast.com/api/f1/${selectedYear}/constructorStandings.json`)
+        fetch(`https://ergast.com/api/f1/${selectedYear}/driverStandings.json`)
             .then(response => response.json())
             .then(data => {
-                const constructors = data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
-                const constructorsObj = constructors.reduce((acc, constructor) => {
-                    const {constructorId, name, nationality, url} = constructor.Constructor;
-                    const {position, points, wins} = constructor;
-                    acc[constructorId] = {constructorId, name, nationality, url, position, points, wins};
+                const drivers = data.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+                const driversObj = drivers.reduce((acc: any, driver: any) => {
+                    const {driverId, givenName, familyName, nationality, dateOfBirth, url} = driver.Driver;
+                    const {constructorId, name} = driver.Constructors[0];
+                    const {position, points, wins} = driver;
+                    acc[driverId] = {
+                        driverId,
+                        givenName,
+                        familyName,
+                        nationality,
+                        dateOfBirth,
+                        url,
+                        position,
+                        points,
+                        wins,
+                        constructorId,
+                        name
+                    };
                     return acc;
                 }, {});
-                const constructorsMap = new Map(Object.entries(constructorsObj));
-                setConstructorsMap(constructorsMap)
+                const driversMap = new Map(Object.entries(driversObj));
+                setDriversMap(driversMap);
                 setIsLoading(false);
             })
-    }, [selectedYear])
+            .catch((error) => {
+                console.log(error);
+            })
+    }, [selectedYear]);
 
     //Year select functionality
     let yearsList = [];
     const currentYear = new Date().getFullYear();
-    const earliestYear = 1958;
+    const earliestYear = 1950;
     for (let year = currentYear; year >= earliestYear; year--) {
         yearsList.push(year);
     }
 
-    function handleYearSelect(value) {
+    function handleYearSelect(value: number) {
         setSelectedYear(value)
     }
 
-    function createData(name, position, points, wins, nationality) {
-        return {name, position, points, wins, nationality};
+    function createData(name: string, position: string, points: string, wins: string, nationality: string, constructorName: string, age: string) {
+        return {name, position, points, wins, nationality, constructorName, age};
     }
 
-    for (let team of constructorsMap.values()) {
-        const nationality = team.nationality;
-        const position = team.position;
-        const points = team.points;
-        const wins = team.wins;
-        const name = team.name;
-        const data = createData(name, position, points, wins, nationality);
+    for (let driver of driversMap.values()) {
+        const {givenName, familyName, nationality, dateOfBirth, name: constructorName} = driver;
+        const position = driver.position;
+        const points = driver.points;
+        const wins = driver.wins;
+        const age = calculateAge(dateOfBirth);
+        const name = `${givenName} ${familyName}`;
+        const data = createData(name, position, points, wins, nationality, constructorName, age);
         rows.push(data);
     }
 
-    function getPositionStyle(position) {
+    function getPositionStyle(position: string) {
         let backgroundColor = '#f3f3f3';
         let fontWeight = "regular";
         switch (position) {
@@ -88,8 +105,8 @@ function ConstructorList() {
 
         switch (backgroundColor) {
             case '#f3f3f3':
-                if (position > 3) {
-                    backgroundColor = position % 2 === 0 ? '#f9f9f9' : '#ffffff';
+                if (parseInt(position) > 3) {
+                    backgroundColor = parseInt(position) % 2 === 0 ? '#f9f9f9' : '#ffffff';
                 }
                 break;
             default:
@@ -103,13 +120,10 @@ function ConstructorList() {
 
     return (
         <Box sx={{display: 'flex', mt: '16px', flexDirection: 'column', alignItems: 'center'}}>
-            <TableContainer component={Paper} className="constructor-table-container"
+            <TableContainer component={Paper} className="table-container"
                             sx={{
-                                maxWidth: '1000px',
-                                backgroundColor: '#f9f9f9',
-                                overflowY: 'scroll',
-                                height: '675px',
-                                position: 'relative'
+                                maxWidth: '1000px', backgroundColor: '#f9f9f9',
+                                overflowY: 'scroll', height: '675px', position: 'relative'
                             }}>
                 {isLoading && (
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
@@ -129,7 +143,7 @@ function ConstructorList() {
                         flexGrow: 1,
                         display: 'flex',
                         fontWeight: 'bold'
-                    }}>{selectedYear} Constructor Standings</Typography>
+                    }}>{selectedYear} Driver Standings</Typography>
                     <Dropdown options={yearsList} onSelect={handleYearSelect}
                               selectedValue={selectedYear} label="Year"/>
                 </Box>
@@ -137,11 +151,11 @@ function ConstructorList() {
                 <Table sx={{minWidth: 650}} aria-label="simple table">
                     <TableHead sx={{backgroundColor: '#f1f1f1', position: 'sticky', top: 0}}>
                         <TableRow>
-                            <TableCell sx={{display: 'flex'}}> <EmojiEventsIcon/></TableCell>
-                            <TableCell align="left" sx={{fontSize: 'large'}}>Constructor Name</TableCell>
+                            <TableCell sx={{display: 'flex'}}><EmojiEventsIcon/></TableCell>
+                            <TableCell align="left" sx={{fontSize: 'large'}}>Driver Name</TableCell>
                             <TableCell align="left" sx={{fontSize: 'large'}}>Points</TableCell>
                             <TableCell align="left" sx={{fontSize: 'large'}}>Wins</TableCell>
-                            <TableCell align="left" sx={{fontSize: 'large'}}>Nationality</TableCell>
+                            <TableCell align="left" sx={{fontSize: 'large'}}>Team</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -153,13 +167,27 @@ function ConstructorList() {
                                 <TableCell align="left">{row.name}</TableCell>
                                 <TableCell align="left">{row.points}</TableCell>
                                 <TableCell align="left">{row.wins}</TableCell>
-                                <TableCell align="left">{row.nationality}</TableCell>
+                                <TableCell align="left">{row.constructorName}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
-        </Box>);
+        </Box>)
 }
 
-export default ConstructorList;
+function calculateAge(dateOfBirth: string): string {
+    const now = new Date();
+    const birth = new Date(dateOfBirth);
+    let years = now.getFullYear() - birth.getFullYear();
+    let months = now.getMonth() - birth.getMonth();
+    let days = now.getDate() - birth.getDate();
+
+    if (months < 0 || (months === 0 && days < 0)) {
+        years--;
+    }
+
+    return years.toString();
+}
+
+export default DriverList;

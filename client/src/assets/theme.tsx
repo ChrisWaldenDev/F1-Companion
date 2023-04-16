@@ -43,7 +43,6 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: '"Roboto"',
-        textTransform: 'none'
     },
     // Add any other customizations here
 });
