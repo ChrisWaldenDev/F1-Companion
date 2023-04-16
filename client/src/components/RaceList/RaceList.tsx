@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import Dropdown from "../Dropdown/Dropdown";
+import Dropdown from "../Dropdown/Dropdown.tsx";
 import {Box, CircularProgress} from "@mui/material";
 import React from "react";
 
