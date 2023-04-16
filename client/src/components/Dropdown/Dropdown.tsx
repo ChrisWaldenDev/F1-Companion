@@ -3,14 +3,14 @@ import {useEffect, useState} from 'react';
 import './dropdown.css';
 import {Box, FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
-type DrowdownProps = {
+type DropdownProps = {
     options: any[];
     onSelect: (value: any) => void;
     selectedValue: any;
     label: string;
 }
 
-function Dropdown({options, onSelect, selectedValue, label}: DrowdownProps) {
+function Dropdown({options, onSelect, selectedValue, label}: DropdownProps) {
     const [selectedOption, setSelectedOption] = useState(options[0]);
 
     useEffect(() => {
