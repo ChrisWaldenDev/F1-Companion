@@ -1,6 +1,6 @@
 import React from "react";
 import {useState, useEffect} from "react";
-import Dropdown from "../Dropdown/Dropdown.js";
+import Dropdown from "../Dropdown/Dropdown.tsx";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import './driverlist.css';
 import {
