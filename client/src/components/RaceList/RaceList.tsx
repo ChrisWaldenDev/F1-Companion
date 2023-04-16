@@ -44,10 +44,10 @@ function RaceList() {
     //Formats date/time to local timezone
     function handleDateFormat(race: any){
         const utcTimeString = race.time;
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
+        const date = new Date(race.date);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
         const combinedDate = new Date(`${year}-${month}-${day}T${utcTimeString}`);
         const localDate = combinedDate.toLocaleString();
 
