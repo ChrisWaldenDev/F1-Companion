@@ -1,4 +1,5 @@
 # F1 Companion
+## !!! This project no longer functions due to the Ergast API shutting down in 2024 !!!
 
 Welcome to F1 Companion! We aim to keep you up-to-date with the world of F1, providing the latest information on drivers, teams, and races. You can find current season standings, as well as explore past season standings and race information. Let us be your go-to source for everything F1!
 
